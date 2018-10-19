@@ -1,0 +1,7 @@
+{
+  "name": "betagor",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
