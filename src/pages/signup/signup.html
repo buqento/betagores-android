@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Buat Akun</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <ion-item-divider text-center color="secondary"><strong>DATA LOGIN</strong></ion-item-divider>
+      <ion-item>
+        <ion-label stacked>Nama Pengguna</ion-label>
+        <ion-input type="text" [(ngModel)]="userData.username" placeholder="Lebih dari 6 karakter"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Kata Sandi</ion-label>
+        <ion-input [type]="password_type" [(ngModel)]="userData.password" placeholder="Lebih dari 6 karakter"></ion-input>
+        <button ion-button item-end icon-only clear large (click)="togglePasswordMode()">
+            <ion-icon name="eye"></ion-icon>
+        </button>
+      </ion-item>
+  </ion-list>
+  <ion-list>
+      <ion-item-divider text-center color="secondary"><strong>DATA PROFIL</strong></ion-item-divider>
+      <ion-item>
+        <ion-icon name="heart"></ion-icon>
+        <ion-label floating>Nama Lengkap</ion-label>
+        <ion-input type="text" [(ngModel)]="userData.namaLengkap"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="userData.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Telepon</ion-label>
+        <ion-input type="tel" [(ngModel)]="userData.telepon"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Alamat</ion-label>
+        <ion-textarea rows="2" [(ngModel)]="userData.alamat"></ion-textarea>
+      </ion-item>
+  </ion-list>
+
+  <div padding>
+      <button ion-button icon-start round large full color="success" (click)="signup()">
+          DAFTAR SEKARANG
+      </button>
+  </div>
+
+</ion-content>
