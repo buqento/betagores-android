@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { ProdukPage } from '../produk/produk';
-
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { DeliveryPage } from '../delivery/delivery';
 
@@ -12,7 +11,6 @@ import { DeliveryPage } from '../delivery/delivery';
   templateUrl: 'order.html',
 })
 export class OrderPage {
-  PushProduk: any;
   totalHarga: any;
   vTotalHarga: any;
   userDetails: any;
@@ -36,8 +34,6 @@ export class OrderPage {
     public authService: AuthService,
     private sqlite: SQLite,
     public navParams: NavParams) {
-      this.PushProduk = ProdukPage;
-
       const data = JSON.parse(localStorage.getItem('userData'));
       this.userDetails = data.userData;
   }
@@ -45,6 +41,10 @@ export class OrderPage {
   ionViewDidLoad() {
     this.checkTable();
     this.vTotalHarga = 0;
+  }
+
+  pageProduk(){
+    this.navCtrl.setRoot(ProdukPage);
   }
 
   checkTable(){

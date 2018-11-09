@@ -48,19 +48,16 @@ export class SignupPage {
       setTimeout(() => { loading.dismiss(); }, 5000);
       this.authService.postData(this.userData,'signup').then((result) => {
       this.responseData = result;
-      console.log(this.responseData);
+      if(this.responseData.userData){
+          localStorage.setItem('userData', JSON.stringify(this.responseData));
+          const data = JSON.parse(localStorage.getItem('userData'));
+          this.userDetails = data.userData;
+          this.navCtrl.setRoot(ProdukPage);
+      }else{ 
+        this.presentToast('Username/Email/Password tidak valid.');
+      }
       
-        if(this.responseData.userData){
-            localStorage.setItem('userData', JSON.stringify(this.responseData));
-            const data = JSON.parse(localStorage.getItem('userData'));
-            this.userDetails = data.userData;
-            
-            localStorage.setItem('userOrder','{"userOrder":{"jumlah":"0"}}');
-            this.navCtrl.setRoot(ProdukPage);
-        }else{ 
-          this.presentToast('Username/Email/Password tidak valid.');
-        }
-        loading.dismiss();
+      loading.dismiss();
       }, (err) => {
         // Error log
       })

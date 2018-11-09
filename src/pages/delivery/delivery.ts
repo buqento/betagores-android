@@ -29,6 +29,10 @@ export class DeliveryPage {
     this.getPesanan();
   }
 
+  pageProduk(){
+    this.navCtrl.setRoot(ProdukPage);
+  }
+
   getPesanan(){
     let loading = this.loadingCtrl.create({
       spinner: 'crescent',
@@ -37,7 +41,7 @@ export class DeliveryPage {
     loading.present();
     setTimeout(() => { loading.dismiss(); }, 5000);
 
-    this.authService.getPesanans(this.userDetails.id).then((result) => {
+    this.authService.getPesanan(this.userDetails.id).then((result) => {
       this.responseData = result;
       this.items = this.responseData;
       loading.dismiss();

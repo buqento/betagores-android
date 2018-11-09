@@ -13,11 +13,13 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
   templateUrl: 'produk.html',
 })
 export class ProdukPage {
-  PushDelivery: any;
   PushPemesanan: any;
   PushPengaturan: any;
+  userDetails: any;
   responseData: any;
   dataSet: any;
+  vTotPesanan: any;
+  vTotTable: any;
 
   constructor(public navCtrl: NavController,
     public loadingCtrl: LoadingController, 
@@ -27,11 +29,44 @@ export class ProdukPage {
     public navParams: NavParams) {
       this.PushPemesanan = PemesananPage;
       this.PushPengaturan = PengaturanPage;
-      this.PushDelivery = DeliveryPage;
+
+      const data = JSON.parse(localStorage.getItem('userData'));
+      this.userDetails = data.userData;
   }
 
   ionViewDidLoad() {
     this.getProduks();
+    this.generateTable();
+    this.getTotPesanans();
+    this.totTable();
+  }
+
+  pageDelivery(){
+    this.navCtrl.setRoot(DeliveryPage);
+  }
+
+  generateTable(){
+    this.sqlite.create({
+      name: 'betagor.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+        db.executeSql('CREATE TABLE keranjang (rowid INTEGER PRIMARY KEY, kode TEXT, nama TEXT, harga TEXT, jumlah TEXT, keterangan TEXT)', [])
+          .then(() => console.log('Table created'))
+          .catch(e => console.log(e));
+      })
+      .catch(e => console.log(e));
+  }
+
+  totTable(){
+    this.sqlite.create({
+      name: 'betagor.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      db.executeSql('SELECT rowid FROM keranjang', [])
+      .then(res => {
+        this.vTotTable = res.rows.length;
+      });
+    }).catch(e => console.log(e));
   }
 
   checkTable(){
@@ -45,7 +80,6 @@ export class ProdukPage {
         if(res.rows.length == 0) {
           this.presentAlert('Ups!', 'Anda belum memilih produk.');
         }
-
         if(res.rows.length > 0) {
           this.navCtrl.push(OrderPage);
         }
@@ -72,10 +106,24 @@ export class ProdukPage {
     });
     loading.present();
     setTimeout(() => { loading.dismiss(); }, 5000);
-
     this.authService.getProduks().then((result) => {
       this.responseData = result;
       this.dataSet = this.responseData;
+      loading.dismiss();
+    })
+  }
+
+  getTotPesanans(){
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+      showBackdrop: true
+    });
+    loading.present();
+    setTimeout(() => { loading.dismiss(); }, 5000);
+
+    this.authService.getTotPesanans(this.userDetails.id).then((result) => {
+      this.responseData = result;
+      this.vTotPesanan = this.responseData[0]['jumlah'];
       loading.dismiss();
     })
   }
@@ -90,4 +138,5 @@ export class ProdukPage {
     }
     this.navCtrl.push(PemesananPage, data);
   }
+
 }

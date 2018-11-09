@@ -52,19 +52,6 @@ export class PemesananPage {
 
   ionViewDidLoad() {
     this.hitung();
-    this.generateTable();
-  }
-
-  generateTable(){
-    this.sqlite.create({
-      name: 'betagor.db',
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE keranjang (rowid INTEGER PRIMARY KEY, kode TEXT, nama TEXT, harga TEXT, jumlah TEXT, keterangan TEXT)', [])
-          .then(() => console.log('Table created'))
-          .catch(e => console.log(e));
-      })
-      .catch(e => console.log(e));
   }
 
   addToKeranjang() {

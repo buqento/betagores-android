@@ -68,11 +68,12 @@ export class LoginPage {
       this.authService.postData(this.userData,'login').then((result) => {
       this.responseData = result;
       if(this.responseData.userData){
+        
         localStorage.setItem('userData', JSON.stringify(this.responseData));
         const data = JSON.parse(localStorage.getItem('userData'));
         this.userDetails = data.userData;
 
-        localStorage.setItem('userOrder','{"userOrder":{"jumlah":"0"}}');
+        // localStorage.setItem('userOrder','{"userOrder":{"jumlah":"0"}}');
         loading.dismiss();
         this.navCtrl.setRoot(ProdukPage);
       }else{

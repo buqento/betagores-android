@@ -2,7 +2,7 @@
     <ion-navbar>
       <ion-title>Keranjang</ion-title>
       <ion-buttons start>
-          <button ion-button icon-only [navPush]="PushProduk">
+          <button ion-button icon-only (click)="pageProduk()">
             <ion-icon name="add"></ion-icon>
           </button>
       </ion-buttons>
@@ -20,9 +20,12 @@
                         <!-- <ion-thumbnail item-start>
                         <img src="{{item.foto}}">
                         </ion-thumbnail> -->
+
                         <h2>{{item.nama}}</h2>
                         <p>{{item.jumlah}} item</p>
-                        <p>{{item.harga}}</p>
+                        <p>Rp.{{item.harga}}</p>
+                        <p><i>{{item.keterangan}}</i></p>
+  
                         <button ion-button icon-only item-end clear color="primarydark" (click)="deleteProduk(item.rowid, msgIndex)">
                             <ion-icon name="close"></ion-icon> 
                         </button>

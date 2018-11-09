@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>On Delivery</ion-title>
     <ion-buttons start>
-        <button ion-button icon-only [navPush]="PushProduk">
+        <button ion-button icon-only (click)="pageProduk()">
           <ion-icon name="add"></ion-icon>
         </button>
     </ion-buttons>
@@ -13,20 +13,22 @@
 
   <div>
 
-      <ion-list *ngFor="let item of items; let msgIndex = index" no-padding>
-          <ion-card>
-              <ion-card-content no-padding>
-                  <ion-item>  
-                      <ion-thumbnail item-start>
-                      <img src="http://dpm-ptsp-kabmbd.com/images/{{item.gambar}}">
-                      </ion-thumbnail>
-                      <h2>{{item.nama}}</h2>
-                      <p>{{item.jumlah}} item</p>
-                      <p>Rp.{{item.total_bayar}}</p>
-                  </ion-item>
-              </ion-card-content>
-          </ion-card>
-      </ion-list>
+    <ion-card *ngFor="let item of items; let msgIndex = index">
+        <ion-item no-padding> 
+
+            <ion-thumbnail item-start>
+            <img src="http://dpm-ptsp-kabmbd.com/images/{{item.gambar}}">
+            </ion-thumbnail>  
+
+            <ion-card-content no-padding>
+                <h2>{{item.nama}}</h2>
+                <p>{{item.jumlah}} item</p>
+                <p>Rp.{{item.total_bayar}}</p>
+                <p><i>{{item.keterangan}}</i></p>
+            </ion-card-content>
+            
+        </ion-item>
+    </ion-card>
 
   </div>
 

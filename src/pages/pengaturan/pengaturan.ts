@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { OrderPage } from '../order/order';
 import { PengaturanAkunPage } from '../pengaturan-akun/pengaturan-akun';
+import { DeliveryPage } from '../delivery/delivery';
 
 @IonicPage()
 @Component({
@@ -12,11 +12,12 @@ import { PengaturanAkunPage } from '../pengaturan-akun/pengaturan-akun';
 export class PengaturanPage {
 
   userDetails: any;
-  pushOrder: any;
+  pushDelivery: any;
   pushPengaturanAkun: any;
   vAlamat: any;
+
   constructor(public navCtrl: NavController) {
-      this.pushOrder = OrderPage;
+      this.pushDelivery = DeliveryPage;
       this.pushPengaturanAkun = PengaturanAkunPage;
 
       const data = JSON.parse(localStorage.getItem('userData'));

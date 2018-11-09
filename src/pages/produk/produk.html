@@ -1,32 +1,58 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Pilih Produk</ion-title>
-    <ion-buttons start>
-        <button ion-button icon-only [navPush]="PushDelivery">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        </button>
-    </ion-buttons>
+    <ion-title>BETAGORES</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card *ngFor="let produk of dataSet" (click)="openPemesanan(produk.id, produk.nama, produk.gambar, produk.harga, produk.kode)">
-    <img src="http://dpm-ptsp-kabmbd.com/images/{{produk.gambar}}"/>
-    <ion-card-content>
-      <ion-card-title>
-        <div class="card-title">{{produk.nama}}</div>
-      </ion-card-title>
-      <div class="card-subtitle">{{produk.harga}}</div>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngFor="let produk of dataSet" (click)="openPemesanan(produk.id, produk.nama, produk.gambar, produk.harga, produk.kode)">
+      <ion-item no-padding> 
+
+        <ion-thumbnail item-start>
+        <img src="http://dpm-ptsp-kabmbd.com/images/{{produk.gambar}}">
+        </ion-thumbnail>  
+
+        <ion-card-content no-padding>
+          <ion-card-title>
+            <div class="card-title">{{produk.nama}}</div>
+          </ion-card-title>
+          <div class="card-subtitle">Rp.{{produk.harga}}</div>
+        </ion-card-content>
+
+      </ion-item>
+    </ion-card>
+
+    <ion-grid no-padding>
+        <ion-row>
+
+          <ion-col (click)="checkTable()">
+              <ion-card color="primary">
+                  <ion-card-content>
+                        <ion-card-title>
+                            <ion-icon name="cart" color="info"></ion-icon>
+                        </ion-card-title>
+                        <p>{{vTotTable}} item</p>
+                  </ion-card-content>
+                </ion-card>
+          </ion-col>
+
+          <ion-col (click)="pageDelivery()">
+              <ion-card color="secondary">
+                  <ion-card-content>
+                        <ion-card-title>
+                            <ion-icon name="checkmark-circle-outline" color="info"></ion-icon>
+                        </ion-card-title>
+                        <p>{{vTotPesanan}} item</p>
+                  </ion-card-content>
+                </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
 
   <ion-fab bottom right>
-    <button ion-fab><ion-icon name="menu"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab (click)="checkTable()"><ion-icon name="cart"></ion-icon></button>
       <button ion-fab [navPush]="PushPengaturan"><ion-icon name="contact"></ion-icon></button>
-    </ion-fab-list>
   </ion-fab>
 
 </ion-content>
